@@ -1,0 +1,545 @@
+/* 통합 css (추후) */
+//
+현재 화면보기용으로 한 설정으로 추후 수정바람
+
+html {
+	height: 100%;
+}
+
+.fp-divfloat {
+	position: absolute;
+	top: 40%;
+	left: 30%;
+	position: absolute;
+	margin: -150px 0 0 -75px;
+}
+
+td a {
+	text-decoration: none
+}
+
+.fp-bodybg {
+	height: 100%;
+	/*background-image: url("../img/dog.jpg");*/
+	background-color: white;
+	background-size: cover;
+}
+
+.navbar {
+	min-height: 70px;
+	border-radius: 0;
+}
+
+.container {
+	
+}
+
+.navbar-toggle {
+	margin-top: 18px;
+}
+
+.navbar-header {
+	min-height: 70px
+}
+
+#viewsTable td {
+	border-left: 1px solid #ddd;
+}
+/******책 insert******/
+.imagePreview {
+	width: 300px;
+	height: 400px;
+	border: 1px dotted #ccc;
+	background-size: 300px 400px;
+	display: block;
+	margin: 10px auto;
+}
+
+.dateInsert {
+	min-width: 350px;
+}
+
+.dateInsert div {
+	width: 30%;
+	display: inline-block;
+}
+
+.dateInsert div>input, .dateInsert div>select {
+	display: inline-block;
+	width: 80%;
+}
+
+/***********책 detail******/
+.review_pre {
+	vertical-align: center;
+	word-break: break-all;
+}
+/************myLibrary*********/
+.center {
+	margin: 0 auto;
+	width: 1010px;
+}
+
+.lbraryTitle {
+	font-size: x-large;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+.lib_wrapper {
+	margin: 0 auto;
+	display: inline-block;
+	text-align: center;
+	width: 1010px;
+	min-height: 100px;
+	border: 1px dotted #ccc;
+}
+
+.lib_book {
+	margin: 10px;
+	display: inline-block;
+	width: 180px;
+	float: left;
+}
+
+.myReview_pre {
+	margin-top: 3px;
+	width: 180px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: normal;
+	overflow: hidden;
+	width: 180px;
+}
+
+.insertDate {
+	font-size: 12px;
+	display: block;
+	both: clear;
+}
+
+.insertComment textarea {
+	width: 100%;
+	height: 100px;
+	border: 1px solid #DDD;
+	background-color: transparent;
+	box-sizing: border-box;
+	padding: 6px;
+	font-size: 14px;
+}
+
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder
+	{ /* WebKit browsers */
+	color: transparent;
+}
+
+input:focus:-moz-placeholder, textarea:focus:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: transparent;
+}
+
+input:focus::-moz-placeholder, textarea:focus::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: transparent;
+}
+
+input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder
+	{ /* Internet Explorer 10+ */
+	color: transparent;
+}
+
+.insertComment button {
+	width: 100%;
+}
+/*******myPage******/
+.myName {
+	font-size: x-large;
+	font-weight: bold;
+	padding: 20px;
+	border: 1px solid #dddddd;
+}
+
+.myInfo {
+	width: 100%; padding : 10px;
+	border: 1px solid #dddddd;
+	background-color: #fafafa;
+	color: #00000;
+	line-height: 40px;
+	border: 1px solid #dddddd;
+	padding: 10px;
+}
+
+.myInfo>tbody>tr>td:first-child {
+	width: 100px;
+	padding-left: 10px;
+	text-align: left;
+}
+
+.follows>td {
+	width: 50%;
+	background-color: white;
+	border: 1px solid #ddd;
+}
+
+#fcount {
+	background-color: #9c1a1a;
+	padding: 3px;
+	color: white;
+}
+
+.bkBadge {
+	display:inline-block;
+	background-color: #ff6161;
+	color: white;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	font-size: 13px;
+	line-height: 40px;
+}
+.myBadge{
+	font-size:15px;
+	padding:5px;
+	line-height:60px;
+	text-align:left;
+}
+.myBadge>span{
+	float:left;
+}
+/*******deleteBook****/
+.lib_book{
+ position: relative;
+}
+.checkDelete{
+	width: 30px;
+	height: 30px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+	display:block;
+	
+ 	position: absolute;
+    left: 2.75em;
+    top: 0.25em;
+
+}
+/*******clubDetail******/
+.joinClub {
+	height: 40px;
+	font-size: 20px;
+	background: #ff6161;
+	font-weight: bold;
+	border-color: #862828;
+	width: 100%;
+}
+
+.wrapper {
+	min-width: 700px;
+}
+
+.clubName {
+	font-size: x-large;
+	font-weight: bold;
+	padding: 20px;
+	border: 1px solid #dddddd;
+}
+
+.clubInfo {
+	padding: 10px;
+	border: 1px solid #dddddd;
+	background-color: #fafafa;
+	color: #00000;
+	line-height: 40px;
+	border: 1px solid #dddddd;
+}
+
+.btnBlue {
+	margin-right: 3px;
+	width: 200PX;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.btnRed {
+	margin-right: 30px;
+	width: 200PX;
+	height: 40px;
+	font-size: 20px;
+	background: #ff6161;
+	font-weight: bold;
+	border-color: #862828;
+}
+/************별점********/
+.starR1.on {
+	background-position: 0 0;
+}
+
+.starR2.on {
+	background-position: -15px 0;
+}
+
+.starR1 {
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat -52px 0;
+	background-size: auto 100%;
+	width: 15px;
+	height: 30px;
+	float: left;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+
+.starR2 {
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat right 0;
+	background-size: auto 100%;
+	width: 15px;
+	height: 30px;
+	float: left;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+/*********검색창**********/
+#searchBook input:-ms-input-placeholder {
+	color: #a8a8a8;
+}
+
+#searchBook input::-webkit-input-placeholder {
+	color: #a8a8a8;
+}
+
+#searchBook input::-moz-placeholder {
+	color: #a8a8a8;
+}
+
+#searchBook {
+	height: 40px;
+	width: 400px;
+	border: 1px solid;
+	margin: 14px;
+	background-color: white;
+}
+
+#searchBook input {
+	background-color: white;
+	height: 100%;
+	font-size: 16px;
+	width: 325px;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+}
+
+#searchBook button {
+	width: 50px;
+	height: 100%;
+	border: 0px;
+	background: #ccc;
+	outline: none;
+	float: right;
+	color: #2f6a9c
+}
+
+.wrapper {
+	/**
+	z-index:-1;
+	position: absolute;
+	width: auto;
+	height: auto;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background: linear-gradient( to right, white 30%,rgba(0,0,0,0.3) )
+	**/
+	/**background: linear-gradient(to right, white 5%, rgba(0, 0, 0, 0.3));**/
+	height: 100%;
+	width: 100%;
+	/*padding-top: 20px;*/
+}
+
+#txtMobile {
+	clear: both;
+	display: box;
+}
+
+#txtMobile select, #txtMobile input {
+	padding: 10px;
+	width: 20%;
+	display: block;
+	float: left;
+	margin-bottom: 30px;
+}
+
+#txtMobile div {
+	line-height: 4;
+	width: 5%;
+	display: block;
+	float: left;
+}
+
+#txtMobile #txtMobileLabel {
+	width: 20%;
+	display: block;
+	float: left;
+}
+
+#txtMobile2 select, #txtMobile2 input {
+	padding: 10px;
+	width: 25%;
+	display: block;
+	float: left;
+	margin-bottom: 30px;
+}
+
+.wrapper2 {
+	idth: 500px;
+	float: left
+}
+
+.fp-bodybg .fp-container div {
+	background-color: white;
+}
+
+.fp-divfloat {
+	position: absolute;
+	top: 40%;
+	left: 20%;
+	position: absolute;
+	margin: -150px 0 0 -75px;
+}
+
+.fp-divfloatcenter {
+	top: 40%;
+	left: 40%;
+	position: absolute;
+	margin: auto;
+}
+
+.fp-logintable {
+	margin-bottom: 0;
+}
+
+#dmList {
+	/** position:static; **/
+	
+}
+
+.fp-alertdiv {
+	position: sticky;
+	/* width: 94%; */
+	/* margin: 0 0; */
+	/* height: 100%; */
+	top: 100%;
+	left: 0px;
+	display: block;
+	/* background: blue; */
+	opacity: 0.7;
+}
+
+}
+.fp-alert {
+	position: absolute;
+	bottom: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	text-align: center;
+}
+
+.fp-divfloatLogin {
+	top: 50%;
+}
+
+.wrapper3 {
+	background: white;
+}
+
+.table-bordered {
+	background: white;
+}
+
+#idchk>input {
+	width: 80%;
+	display: inline-block;
+}
+
+.navbar-default {
+	color: white;
+	background-color: #2f6a9c;
+	border-color: #244665;
+}
+
+.navbar-default .navbar-brand {
+	color: white;
+}
+
+.navbar-brand:hover {
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+	font-size: 20px;
+	line-height: 2;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+	color: #ccc;
+	position: relative;
+	top: 1;
+	right: -1;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover,
+	.navbar-default .navbar-nav>.active>a:focus {
+	color: #566c7f;
+	background-color: white;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover,
+	.navbar-default .navbar-nav>.open>a:focus {
+	color: #566c7f;
+	background-color: white;
+}
+
+@media ( max-width : 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+		color: white;
+	}
+}
+
+thead th {
+	background-color: #2c353e;
+}
+
+.queT {
+	background-color: #fafafa;
+	color: #00000;
+}
+
+.queCon {
+	text-align: left;
+	padding: 0 10px;
+	font-size: 12px;
+}
+
+.answerQ {
+	background-color: #fafafa;
+	color: #00000;
+	text-align: left;
+	padding: 0 10px;
+}
+
+.answerA {
+	text-align: right;
+	padding: 10px 10px;
+}
+
+.answerAcon {
+	text-align: right;
+	padding: 10px 10px;
+	font-size: 12px;
+}

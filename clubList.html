@@ -1,0 +1,171 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+							</script>
+							<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+		<!---클럽요청 -->
+		<script type="text/javascript">
+		
+			function requestClub(){
+				$("#checkType").attr("class","modal-content panel-success");
+				$('#messageModal').modal("show");
+			}
+
+		</script>
+			<!---클럽요청 -->
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!-- --------세부 검색용 --------- -->
+				<form method="get" action="#">
+					<!-- 세부 검색용 form태그입니다! 다른 방식으로 구현 시 삭제해주세요! -->
+					<div style="text-align: center; background-color:#eee; border: 1px solid #dddddd; padding:10px;margin-bottom: 30px;">
+						<select  name="searchWhat" style=" display: inline;    width: 100px;" class="form-control">
+							<option value="Club_Name">클럽명</option>
+							<option value="Genre_Name">장르명</option>
+						</select>
+						<input class="form-control" style="display: inline;width: 80%;" name="searchKey" type="text" maxlength="20"   placeholder="찾을 클럽명의 검색어를 입력하세요">
+						<input class="btn btn-primary" type="submit" value="검색">				
+					</div>
+				</form>
+				<!-- --------세부 검색용 --------- -->
+				<!-- ------------검색결과 출력 =========== -->
+				<form action= "#" method="post">
+				<!-- 카트 담기용 form태그입니다! 다른 방식으로 구현 시 삭제해주세요! -->
+					<table class="table table-bordered table-hover" id="searchResult" style="text-align: center; border: 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan="6">
+									<h4>클럽 LIST</h4>
+								</th>
+							</tr>
+							<tr>
+								<th style="background-color: #fafafa; color: #000000; width: 100px;"><h5>장르</h5></th>
+								<th style="background-color: #fafafa; color: #000000; width: 500px;"><h5>독서클럽명</h5></th>
+								<th style="background-color: #fafafa; color: #000000; width: 100px;"><h5>클럽장</h5></th>
+								<th style="background-color: #fafafa; color: #000000; width: 70px;"><h5>회원수</h5></th>
+								<th style="background-color: #fafafa; color: #000000; width: 200px;"><h5>클럽생성일자</h5></th>
+							</tr>
+							<% for(var i = 0; i < clubname.length; i++) { %>
+								<tr>
+									<td><a href="/club/<%= clubname[0].Club_Name%>"><%= clubname[0].Club_Name%></a></td>
+									<td><%= clubname[0].Genre_Name%></td>
+									<td><%= clubname[0].ID%></td>
+									<td><%= clubname[0].User_Num%></td>
+									<td><%= clubname[0].Club_Create_Date%></td>
+								</tr>
+							<% } %>
+						</thead>
+						<tbody>
+							<!-- 검색결과가 없을 경우 -->
+							<tr style="background-color: #fcfcfc; color: #444444;">
+								<td colspan="6">(검색결과 없을 경우 출력)해당하는 클럽이 없습니다</td>
+							</tr>
+							<!-- 검색결과가 없을 경우 -->
+							<!-- 검색결과가 있을 경우 -->
+							<tr onclick="location.href='#'">
+								<td>장르명 출력</td>
+								<td style="text-align: left;">
+									<h5>클럽명 출력</h5>
+								</td>
+								<td>클럽장 출력</td>
+								<td>회원수 출력</td>
+								<td>클럽생성일자 출력</td>
+							</tr>
+							<!-- 페이징 구현 안할  경우 빼주세요 -->
+							<tr>
+								<td colspan="8">
+									<ul class="pagination" style="margin: 0 auto;">
+										<li><a href="#">
+											<span style="color: gray;"><img src="img/icon_arrow1.png" style="width: 20px;"></span>
+										</a></li> 
+										<li class="active">
+											<a href="#">1</a>
+										</li>
+										<li >
+											<a href="#">2</a>
+										</li> 
+										<li>
+											<a href="#">3</a>
+										</li>
+										<li>
+											<a href="#">4</a>
+										</li>
+										<li>
+											<a href="#">5</a>
+										</li>
+										<li>
+											<a href=" "><img src="img/icon_arrow2.png" style="width: 20px;"></a>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<!-- 페이징 구현 안할  경우 빼주세요 -->
+						</tbody>
+					</table>
+				</form>
+					<button onclick="requestClub();"  class="btn btn-primary pull-right  joinClub" type="button" >신규 클럽 요청하기</button>
+				<!--======= 검색결과 ========-->
+				</main>
+			</div>
+		</div>
+		<!-- ---------------------모달------------------- -->
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<!-- form -->
+			<form action="http://naver.com" method="post">
+			<div class="vertical-alignment-helper">
+				<div class="modal-dialog r vertical-align-cente">
+					<div id="checkType" >
+						<div class="modal-header panel-heading">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times</span>
+								<span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title">
+								독서 클럽 요청
+							</h4>
+						</div>
+						<div class="modal-body">
+							<select  name="Genre_Name" style=" display: inline;    width: 100p%;" class="form-control">
+								<option value="">장르명을 선택하세요</option>
+								<option value="GenreVal1">장르명1</option>
+								<option value="GenreVal2">장르명2</option>
+								<option value="GenreVal3">장르명3</option>
+							</select>
+							<input  type="text" name="Requset_Title" placeholder="요청 제목을 입력하세요"  maxlength="50" class="ng-pristine ng-valid ng-empty  ng-valid-maxlength ng-touched" autocomplete="off" style="padding:8px; display:block; width:100%;">
+							<textarea class="form-control" style="height:100%;" name="Requset_Reason" placeholder="요청 사유를 입력하세요"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary" >확인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>	
+
+		<!-- ---------------------모달------------------- -->
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

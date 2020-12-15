@@ -1,0 +1,82 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+        <%-include('head/nav.ejs')%>
+
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+								function btn(){
+									alert('로그인 후 이용가능합니다.');
+								}
+							</script>
+							<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+
+		<div class="container"  style="width:100%;   height:40px;    text-align:center;">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!--======= 질문리스트 ========-->
+				<div style="display:inline-block; width: 50%; margin-right:5%; margin-left: 5%; vertical-align: top;">
+					<table class="table table-bordered table-hover" style="text-align : center; border : 1px solid #dddddd; ;">
+						<thead >
+							<tr>
+								<th colspan="2" ><h4>질문리스트</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for (var i=0 ; i < qnaList.length; i++) { %>
+							<tr >
+								<td class="queT" style="color: black;">
+									<a href="/book/answerList/<%= qnaList[i].Que_Code %>">Q. <%= qnaList[i].Que_Title %> </a>
+								</td>
+							</tr>
+							<tr >
+								<td class="queCon" style="color: black;">
+									> <%= qnaList[i].Que_Content %>
+								</td>
+							</tr>
+							<% } %>
+							<% if (qnaList.length == 0) { %>
+								<tr>
+									<td>질문이 없습니다.</td>
+								</tr>
+							<% } %>
+							
+						</tbody>
+					</table>
+				</div>
+				<!--======= 질문리스트 ========-->
+				<!--======= 답변리스트 ========-->
+				
+							<!-----------답변 예시------->
+				<!--======= 답변리스트 ========-->
+				<div style="width:100%;   height:40px;    text-align:center;">
+					<% if (sess.userid == null) { %>
+						<button class="btn btn-primary" style="width: 30%" onclick="javascript:btn(); location.href='/users/login'">질문 작성하러 가기</button>
+					<% } else { %>
+					<input type="button"  class="btn btn-primary" style="width:30%;  ;" onclick="location.href='/book/qnaWrite/<%= bookList[0].ISBN%>'" value="질문 작성하러 가기"></input>
+					<% } %>
+				</div>
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

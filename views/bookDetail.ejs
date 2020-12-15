@@ -1,0 +1,143 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+   <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+   <div class="wrapper">
+      <%-include('head/nav.ejs')%>
+      <!------------------------HEADER::공통------------------------>
+
+      <!-- javascript:검색어 체크 -->
+      <script type="text/javascript">
+         function keyworkd_check() {
+            if (document.search.keyword.value == '') {
+               alert('검색어를 입력하세요');
+               document.search.keyword.focus();
+               return false;
+            }
+         }
+      </script>
+      <!-- javascript:검색어 체크 -->
+
+      <!------------------------메인------------------------>
+      <form action="/book/bookDetail/<%=bookDetail[0].ISBN%>" method="POST">
+         <div class="container">
+            <!-- iam-wrapper -->
+            <div class="iam-wrapper">
+               <main class="iam-main ng-scope">
+                  <!--======= 책상세 ========-->
+                  <table class="table table-bordered " style="text-align : center; border : 1px solid #dddddd">
+                     <thead>
+                        <tr>
+                           <th colspan="6">
+                              <h4><%= bookDetail[0].Title%></h4>
+                           </th>
+                        </tr>
+                        <tr>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>ISBN</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].ISBN%> </h5>
+                           </td>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>장르</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].Genre_Name%> </h5>
+                           </td>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>저자</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].Author%> </h5>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>출판사</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].Publisher%> </h5>
+                           </td>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>출간일</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].Publication_Date%> </h5>
+                           </td>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>옮긴이</h5>
+                           </td>
+                           <td>
+                              <h5> <%= bookDetail[0].Translator%> </h5>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>평균별점</h5>
+                           </td>
+                           <% if (star[0] != null) { %>
+                           <td colspan="">
+                              <h5><%-include('head/star.ejs')%></h5>
+                           </td>
+                           <% } else { %>
+                           <td colspan="">
+                              <h5>별점없음</h5>
+                           </td>
+                           <% } %>
+                           <td colspan="4">
+
+                              <input type="submit" class="btn btn-primary "
+                                 style="margin-right: 30px; width: 200PX; height: 40px;font-size: 20px; background: #ff6161; font-weight:bold;   border-color: #862828;"
+                                 value="내 서재 담기"></input>
+                              <input type="button" onclick="location.href='/book/qna/<%=bookDetail[0].ISBN%>'"
+                                 class="btn btn-primary "
+                                 style="margin-right: 3px; width: 200PX; height: 40px;font-size: 20px;   font-weight:bold;"
+                                 value="질문리스트 가기">
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style="background-color:#fafafa; color:#000; width:80px;">
+                              <h5>표지</h5>
+                           </td>
+                           <td colspan="5">
+                              <h5><img src="../../public/<%= bookDetail[0].Cover%>" style="width:300px;"></h5>
+                           </td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td style="background-color:#fafafa; color:#000; width:80px;" colspan="6">
+                              <h5>서평 preview</h5>
+                           </td>
+                        </tr>
+
+                        <% if (review.length != null) { %>
+                        <% for (var i=0; i< review.length; i++) { %>
+                        <tr>
+                           <td style="width:80px; text-align: center;"
+                              onclick="location.href='/library/library/<%= review[i].ID%>'">
+                              <h5><%= review[i].ID%></h5>
+                           </td>
+                           <td colspan="5" class="review_pre" style="text-align: center;">
+                              <%= review[i].Con%>
+                           </td>
+                        </tr>
+                        <% } %>
+                        <% } %>
+                     </tbody>
+                  </table>
+                  <!--======= 책상세 ========-->
+               </main>
+            </div>
+         </div>
+         <!------------------------메인------------------------->
+   </div>
+</body>
+
+</html>

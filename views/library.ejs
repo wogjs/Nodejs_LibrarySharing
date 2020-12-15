@@ -1,0 +1,163 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+        <!------------------------HEADER::공통------------------------>
+        <input id="id" value="<%= library[0].ID %>" hidden>
+        <script type="text/javascript">
+            function keyworkd_check() {
+                if (document.search.keyword.value == '') {
+                    alert('검색어를 입력하세요');
+                    document.search.keyword.focus();
+                    return false;
+                }
+            }
+
+            var id = document.getElementById('id').value;
+
+            function unFollow() {
+                $.ajax({
+                    url: "/library/Follow/?follow=unlow&id=" + id,
+                    method:"POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                    if (data == false) {
+                        alert("다시 찍어주세요");
+
+                    }
+                    else {
+                    }
+                }
+                })
+                setTimeout(function () {
+                    location.reload();
+                },100);
+            }
+
+            function Follow() {
+                $.ajax({
+                    url: "/library/Follow/?follow=low&id=" + id,
+                    method:"POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == false) {
+                            alert("다시 찍어주세요");
+                            
+                        }
+                        else {
+                        }
+                    }
+                })
+                setTimeout(function () {
+                    location.reload();
+                },100);
+            }
+        </script>
+        <!------------------------메인------------------------>
+        <div class="container">
+            
+            <!-- iam-wrapper -->
+            <div class="iam-wrapper">
+                <!-- 내 서재 view   -->
+                <p class="lbraryTitle">[<%= library[0].ID %>]님의 서재</p>
+                <% if(library[0].ID == sess.userid || sess.userid == null) { %>
+                
+                <% } else { %>
+                <div class="lbraryTitle" style="float: right; margin-top: -30px;"> 팔로우 :
+                    <% if(like.length == 0){ %>
+                    <button name="noFollow" id="noFollow" onclick="unFollow()"><img class="media-object"
+                            style="width:30px; height: 30px; margin-top: -10px;display:inline;"
+                            src="../../public/img/black_follow.png"></button>
+                    <% } else { %>
+                    <button name="Follow" id="Follow" onclick="Follow();"><img class="media-object"
+                            style="width:30px; height: 30px; margin-top: -10px;display:inline;"
+                            src="../../public/img/follow.png"></button>
+                    <% } %>
+                </div>
+                <% } %>
+               <div class="myBadge" style="margin-left: 20px;">
+                        <span class="label label-info">뱃지 </span>
+                        <%= console.log("뱃지 갯수",badge.length)%>
+                        <% for (var i=0; i< badge.length; i++) {%>
+                            <div class="media-object img-circle bkBadge">독서왕</div>
+                        <% } %>
+               </div>
+                <%if (libraryRow.length != 0) {%>
+                <form method="post" action="/library/library/<%= libraryRow[0].ISBN %>"
+                    class="ng-pristine ng-valid ng-valid-email ng-valid-maxlength">
+                    <main class="iam-main ng-scope">
+                        <table class="table" style="margin: 0 auto;background: white; text-align: center; border: 1px solid #dddddd;">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">
+                                        <h3>서재</h3>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="viewsTable">
+                                <!-- 여기에 내용 -->
+
+                                <tr  style="border: 1px solid #dddddd">
+                                    <% for (var i=0; i< libraryRow.length; i++) { %>
+                                        <% if (i%4==0) { %>
+                                            <tr></tr>
+                                        <% } %>
+                                        <td onclick="location.href='/library/myBookDetail/?ID=<%= libraryRow[i].ID%>&ISBN=<%= libraryRow[i].ISBN %>'" style="border: 1px solid #dddddd; width: 100px;">
+                                            <img class="media-object" style="width:100px; height: 150px; margin:0px auto;display:inline;" src="../../<%= libraryRow[i].Cover%>">
+                                            <h4>
+                                                <span class="label label-info"> <%= libraryRow[i].Genre_Name%></span>&nbsp;
+                                                &nbsp;
+                                                <a href="/library/myBookDetail/?ID=<%= libraryRow[i].ID%>&ISBN=<%= libraryRow[i].ISBN %>"><%= libraryRow[i].Title%></a>
+                                                <br>
+                                                <br>
+                                                <% for(var j=0; j< reviewList.length; j++) { %>
+                                                    <% if (libraryRow[i].ISBN == reviewList[j].ISBN) { %>
+                                                        <div class="myReview_pre" style="width: 110px; white-space: nowrap; overflow: hidden; margin-left: 40%;"><%= reviewList[j].Con%></div>
+                                                        <% break;%>
+                                                    <% } %>
+                                                <% } %>
+                                            </h4>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        <div>
+                        </form>
+                        <% } else { %>
+                        
+                        <table class="table" style="margin: 0 auto;background: white; text-align: center; border: 1px solid #dddddd;">
+                            <thead>
+                                
+                                <tr>
+                                    <div class="lib_wrapper" style="width: 100%;">현재 등록된 도서가 없습니다.</div>
+                                </tr>
+                            </thead>
+                        </table>
+                        <% } %>
+
+                        <% if (sess.userid == library[0].ID) { %>
+                                <!-- if 등록된 책있으면 -->
+                                <input class="btn btn-primary pull-right"  style="margin-left:10px; background-color:#000" onclick="location.href='/library/myLibraryDelete'" value="책 삭제">                  
+                                <!-- if 등록된 책 없으면 지워주세요 -->
+                                <input type="button" class="btn btn-primary pull-right" onclick="location.href='/library/myBookInsert'" value="책 등록">
+                        <% } %>
+                            </div>
+                    </main>
+                
+                <!-- 이달의 책 view   -->
+            </div>
+        </div>
+        <!------------------------메인------------------------->
+    </div>
+</body>
+
+</html>

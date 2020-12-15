@@ -1,0 +1,84 @@
+
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+        <%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!-- 내 서재 view	-->
+		
+				<div class="center">
+					<p class="lbraryTitle">
+						내 서재
+					</p>
+					<!----------- 서재내용 : if 등록된 책 없으면  ------------->
+					<div class="lib_wrapper">
+						현재 등록된 도서가 없습니다.
+					</div>
+					<!----------- if 등록된 책 없으면  ------------->
+					<!----------- 서재내용 : if 등록된 책 있으면  ------------->
+					<div class="lib_wrapper">
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">서평내용서평내용서평내용서평내용서평내용서평내용서평내용서평내용서평내용서평내용서평내용서평내용</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......2</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......3</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......4</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......5</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......</div>
+						</div>
+						<div class="lib_book" onclick="location.href='#'">
+							<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+							<!-- if 서평 없으면 지워주세요! -->
+							<div class="myReview_pre">나는 이 책을 읽고.......</div>
+						</div>
+					</div>
+					<!----------- if 등록된 책 있으면  ------------->
+					<div>
+						<!-- if 등록된 책있으면 -->
+						<button class="btn btn-primary pull-right"  style="margin-left:10px; background-color:#000" onclick="location.href=''">책 삭제</button>						
+						<!-- if 등록된 책 없으면 지워주세요 -->
+						<button class="btn btn-primary pull-right" onclick="location.href=''">책 등록</button>
+					</div>
+				</div>
+
+				<!-- 내 서재 view	-->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

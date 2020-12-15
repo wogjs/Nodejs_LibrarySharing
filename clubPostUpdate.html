@@ -1,0 +1,148 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width-device-width, intial-scale=1">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/setenforce.css">
+<link rel="stylesheet" href="css/login.css">
+<script src="js/bootstrap.js"></script>
+<title>책핌 :: 회원 서재 공유 시스템</title>
+<style>
+</style>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<!-- 반응형 버튼 / 모바일이면 위에 아이콘 -->
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"
+					style="margin-right: 10px; padding: 2px 10px 1px 3px; line-height: 60px;">
+					<img class="pull-left media-object"
+					style="margin: 3px 10px; width: 80px; height: 60px;"
+					src="img/logo.png">
+				</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li></li>
+					<li class=""><a href="#">내 서재</a></li>
+					<li class=""><a href="#">독서 클럽</a></li>
+					<li class="">
+					<li class="">
+						<div id="searchBook">
+							<input type="text" placeholder="책 검색어 입력">
+							<button>검색</button>
+						</div>
+					</li>
+					</li>
+
+				</ul>
+				<!-- 로그인X 
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 접속하기<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li class=""><a href="#">로그인</a></li>
+							<li class=""><a href="#">회원가입</a></li>
+						</ul></li>
+				</ul>
+				 로그인X -->
+				<!-- 로그인o -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> 회원관리<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">로그아웃</a></li>
+							<li class=""><a href="#">마이 페이지</a></li>
+						</ul></li>
+				</ul>
+				<!--  로그인o -->
+			</div>
+		</nav>
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+							</script>
+							<!-- javascript:검색어 체크 -->
+							
+		<!------------------------HEADER::공통------------------------>
+							
+		<!------------------------메인------------------------>
+		
+	 	<!-- -----------------대댓글용 -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+	 	<script type="text/javascript">
+	 	//대댓글 입력창
+        $(document).on("click","td[id='comment']",function(){ //동적 이벤트
+            var Group_Seq = $(this).attr("Group_Seq");
+
+        	alert("Group_Seq:"+Group_Seq);
+            //입력받는 창 등록
+            var replyEditor = 
+            	`<tr  class="insertComment">						
+					<td colspan="6" >
+					<form action="#?Group_Num=`+Group_Seq+`method="post">	
+					<textarea name="Comment_Con" placeholder="댓글내용을 입력하세요"></textarea>	
+					<button class="btn btn-primary" onclick="idCheckFunction();" type="button">덧글 작성하기</button>		
+					</form></td>
+					</tr>`;
+	
+		            var prevTr = $(this).parent();
+		          prevTr.after(replyEditor);    
+             
+        });
+	 	</script>
+	 	<!-- -------------대댓글용 -->
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!--======= 책상세 ========-->
+				<table class="table table-bordered " style="text-align : center; border : 1px solid #dddddd">
+					<thead >
+								<th colspan="2"><h4>
+								독서 클럽 게시글 수정하기
+								</h4></th>
+						</thead>
+						<tbody>
+							<tr >
+								<td style="background-color:#fafafa; color:#000;">
+									<input class="form-control"  name="Post_Title" type="text"  maxlength="300"   value="Post_Title:기존의 게시글 제목이 출력됩니다">
+									<textarea class="form-control"  name="Post_Con"  style="height:300px;" >Post_Con:기존의 게시글 내용이 출력됩니다</textarea>	</td>
+							</tr>
+						</tbody>
+					</table>
+				<a href="#"  class="btn btn-primary pull-right btnBlue" type="button">목록으로 돌아가기</a>
+				<a href="#"  class="btn btn-primary pull-right btnRed" type="button">게시글 수정하기</a>
+				
+				<!--======= 클럽ㄱ ㅔ시글상세 ========-->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

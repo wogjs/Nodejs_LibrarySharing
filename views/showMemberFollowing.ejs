@@ -1,0 +1,125 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+
+		<!-- javascript:검색어 체크 -->
+		<script type="text/javascript">
+			function keyworkd_check() {
+				if (document.search.keyword.value == '') {
+					alert('검색어를 입력하세요');
+					document.search.keyword.focus();
+					return false;
+				}
+			}
+		</script>
+		<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+		<!---클럽요청 -->
+		<script type="text/javascript">
+
+			function requestClub() {
+				$("#checkType").attr("class", "modal-content panel-success");
+				$('#messageModal').modal("show");
+			}
+
+		</script>
+		<!---클럽요청 -->
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+					<!-- ------------회원리스트 출력 =========== -->
+					<table class="table table-bordered table-hover" id="searchResult"
+						style="text-align: center; border: 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan="6">
+									<h4>[ 팔로잉 ] LIST</h4>
+								</th>
+							</tr>
+							<tr>
+								<th style="background-color: #fafafa; color: #000000; width: 150px;">
+									<h5>아이디</h5>
+								</th>
+								<th style="background-color: #fafafa; color: #000000; width: 150px;">
+									<h5>이름</h5>
+								</th>
+								<th style="background-color: #fafafa; color: #000000;width: 300px;">
+									<h5>소속 독서클럽</h5>
+								</th>
+								<th style="background-color: #fafafa; color: #000000; ">
+									<h5>독서왕 뱃지</h5>
+								</th>
+						</thead>
+						<tbody>
+							<% for (var i=0; i< wing.length; i++) { %>
+								<tr onclick="location.href='/library/library/<%= wing[i].Follow_ID%>'">
+									<td>
+										<h5><%= wing[i].Follow_ID%></h5>
+									</td>
+									<td>
+										<h5><%= wing[i].Name%></h5>
+									</td>
+									<td style="text-align: left;">
+										<h5><%= wing[i].Club_Name%></h5>
+									</td>
+									<td class="myBadge">
+										<% for (var j=0; j< wing[i].kingCount; j++) {%>
+											<div class="media-object img-circle bkBadge">독서왕</div>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+							<tr>
+								<td colspan="8">
+									<ul class="pagination" style="margin: 0 auto;">
+										<li><a href="#">
+												<span style="color: gray;"><img src="../../img/icon_arrow1.png"
+														style="width: 20px;"></span>
+											</a></li>
+										<li class="active">
+											<a href="#">1</a>
+										</li>
+										<li>
+											<a href="#">2</a>
+										</li>
+										<li>
+											<a href="#">3</a>
+										</li>
+										<li>
+											<a href="#">4</a>
+										</li>
+										<li>
+											<a href="#">5</a>
+										</li>
+										<li>
+											<a href=" "><img src="../../img/icon_arrow2.png" style="width: 20px;"></a>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<!-- 페이징 구현 안할  경우 빼주세요 -->
+						</tbody>
+					</table>
+					<button onclick="location.href='/users/mypage'" class="btn btn-primary pull-right " type="button"
+						style="width:100%;">마이페이지로 돌아가기</button>
+
+					<!-- ------------회원리스트 출력 =========== -->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+
+</html>

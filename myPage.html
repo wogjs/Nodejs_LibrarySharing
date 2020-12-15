@@ -1,0 +1,231 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope wrapper">
+				<!--======= 프로필 ========-->
+				<div style="display:inline-block; width: 36%; margin-right:3%;vertical-align: top;">
+					<div class="myName">
+						[ 회원이름 ]
+					</div>
+					<table class="table table-bordered " style="border : 1px solid #dddddd;text-align:center; ">
+						<tr>
+							<td colspan="2" class="myBadge">
+							<span class="label label-info">뱃지 </span> 
+							<div class="media-object img-circle bkBadge">독서왕</div>
+							<div class="media-object img-circle bkBadge">독서왕</div>
+							<div class="media-object img-circle bkBadge">독서왕</div>
+							<div class="media-object img-circle bkBadge">독서왕</div>
+							<div class="media-object img-circle bkBadge">독서왕</div>
+							</td>
+						</tr>
+						<!--- if 서재가 전채공개상태- -->
+						<tr  style="text-align:left;">
+							<td colspan="2">
+							 내 서재::<b>전체공개 상태</b>
+							 <button type="button" onclick="location.href='#'" class="btn btn-primary pull-right">비공개로 바꾸기</button>
+							</td>        
+						</tr>
+						<!--- if 서재가 전채공개상태- -->
+						<!--- if 서재가 비공개상태- -->
+						<tr  style="text-align:left;">
+							<td colspan="2">
+							 내 서재::<b>비공개 상태</b>
+							 <button type="button" onclick="location.href='#'" class="btn btn-primary pull-right">전체공개로 바꾸기</button>
+							</td>        
+						</tr>
+						<!--- if 서재가 비공개상태- -->
+						<tr class="follows">
+							<td onclick="location.href='#?type=following'">
+								<b>following</b> ::
+								<span id="fcount">3</span>	
+							</td>
+							<td onclick="location.href='#?type=followers'">
+								<b>followers</b> ::
+								<span id="fcount">3</span>	
+							</td>
+						</tr>
+					</table>
+					<table class="myInfo">
+						<tbody>
+						<tr>
+							<td>- 아이디 </td>
+							<td>: $id</td>
+						</tr>
+						<tr>
+							<td>- 거주지 </td>
+							<td>: $Address</td>
+						</tr>
+						<tr>
+							<td> - 소속 클럽 </td>
+							<td>: $Club_Name</td>
+						</tr>
+						<tr>
+							<td>- 이름 </td>
+							<td>: $Name</td>
+						</tr>
+						<tr>
+							<td>- 전화번호 </td>
+							<td>: $Phone_Num</td>
+						</tr>
+						<tr>
+							<td>- 생년월일</td>
+							<td>: $Birthday</td>
+						</tr>
+						<tr>
+							<td>- 이메일 </td>
+							<td>: $Email</td>
+						</tr>
+						<tr>
+							<td>- 가입날짜</td>
+							<td>: $Sign_date</td>
+						</tr>
+						</tbody>			
+					</table>
+					<div style="margin-top:10px;">
+					<a href="#"  class="btn btn-primary pull-right  btnRed" style="width:45%;margin-right:20px;">회원정보 수정하기</a>
+					<a href="#?type=recommend"  class="btn btn-primary pull-right  btnBlue"style="width:45%;" >서재 추천받기</a>
+					</div>
+				</div>
+				<!--======= 프로필 ========-->
+				<!--======= 통계 =======-->
+				<div style="display:inline-block; width: 60%; vertical-align: top;">
+				
+					<table class="table table-bordered " style=" border : 1px solid #dddddd; ">
+						<thead>
+							<tr>
+								<th colspan="2"><h4>2019년의 월별 독서량 리스트</h4></th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td colspan="2">
+									<ul class="pagination" style="margin: 0 auto;">
+										<li><a href="#">		
+											<span>2018년 <<</span>
+										</a></li> 
+										<li class="active">
+											<a href="#?Month=201901">1</a>
+										</li>
+										<li >
+											<a href="#">2</a>
+										</li> 
+										<li>
+											<a href="#">3</a>
+										</li>
+										<li>
+											<a href="#">4</a>
+										</li>
+										<li>
+											<a href="#">5</a>
+										</li>
+										<li>
+											<a href="#">6</a>
+										</li>
+										<li>
+											<a href="#">7</a>
+										</li>
+										<li>
+											<a href="#">8</a>
+										</li>
+										<li>
+											<a href="#">9</a>
+										</li>
+										<li>
+											<a href="#">10</a>
+										</li>
+										<li>
+											<a href="#">11</a>
+										</li>
+										<li>
+											<a href="#">12</a>
+										</li>
+										<li>
+											<a href=" ">											
+												<span style="color: gray;">>> 2019년</span>	
+											</a>
+										</li>
+									</ul>
+								</td>
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>소설</h5>
+								</td> 
+								<td>
+									12권
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>비문학</h5>
+								</td> 
+								<td>
+									3권
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>장르명:Genre_Name</h5>
+								</td> 
+								<td>
+									독서권수 : Reading_Book_Amount
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>장르명:Genre_Name</h5>
+								</td> 
+								<td>
+									독서권수 : Reading_Book_Amount
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>장르명:Genre_Name</h5>
+								</td> 
+								<td>
+									독서권수 : Reading_Book_Amount
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>장르명:Genre_Name</h5>
+								</td> 
+								<td>
+									독서권수 : Reading_Book_Amount
+								</td> 
+							</tr>
+							<tr onclick="location.href='#'">
+								<td style="width:200px;">
+									<h5>장르명:Genre_Name</h5>
+								</td> 
+								<td>
+									독서권수 : Reading_Book_Amount
+								</td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!--======= 통계 =======-->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

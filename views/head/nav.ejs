@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <!-- 반응형 버튼 / 모바일이면 위에 아이콘 -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/" style="margin-right: 10px; padding: 2px 10px 1px 3px; line-height: 60px;">
+            <img class="pull-left media-object" style="margin: 3px 10px; width: 80px; height: 60px;"
+                src="../../public/img/logo.png">
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li></li>
+            <li class="">
+                <% if (sess.userid != null) { %>
+                <a href="/library/library/<%= sess.userid%>">내 서재</a>
+                <% } %>
+            </li>
+            <li class="">
+                <a href="/club/clubList">독서 클럽</a>
+            </li>
+            <li class="">
+                <form class="navbar-form navbar-right" action="/book/bookList" method="POST">
+                    <div id="searchBook">
+                        <input type="text" placeholder="책 검색어 입력" style="color: black;" name="bookSearch" id="bookSearch">
+                        <input style="color: blue; width: 50px; background-color: lightgray; float: right;" type="submit" value="검색">
+                    </div>
+                </form>
+            </li>
+
+        </ul>
+
+        <!-- 로그인X -->
+        <% if(sess.userid == null){ %>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="false"> 접속하기<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class=""><a href="/users/login">로그인</a></li>
+                    <li class=""><a href="/users/join">회원가입</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- 로그인X -->
+        <% } else { %>
+        <!-- 로그인o  -->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    aria-haspopup="true" aria-expanded="false"> 회원관리<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/logout">로그아웃</a></li>
+                    <li class=""><a href="/users/mypage">마이 페이지</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- 로그인o -->
+        <% } %>
+    </div>
+</nav>

@@ -1,0 +1,66 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+							</script>
+							<!-- javascript:검색어 체크 -->
+							
+		<!------------------------HEADER::공통------------------------>
+							
+		<!------------------------메인------------------------>
+		
+	 	<!-- -----------------대댓글용 -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+	 	<script type="text/javascript"></script>
+	 	
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!--======= 책상세 ========-->
+				<table class="table table-bordered " style="text-align : center; border : 1px solid #dddddd">
+					<thead >
+								<th colspan="2"><h4>
+								독서 클럽 게시글 작성하기
+								</h4></th>
+						</thead>
+						<tbody>
+							<tr >
+								<td style="background-color:#fafafa; color:#000;">
+									<input class="form-control"  name="Post_Title" type="text"  maxlength="300"   placeholder="게시글 제목을 입력하세요">
+									<textarea class="form-control"  name="Post_Con"  style="height:300px;" placeholder="게시글 내용을 입력하세요"></textarea>	</td>
+							</tr>
+						</tbody>
+					</table>
+				<a href="#"  class="btn btn-primary pull-right btnBlue">목록으로 돌아가기</a>
+						
+				<!-- if 독서왕일 경우 출력-------------- -->
+				<a href="#"  class="btn btn-primary pull-right btnRed" type="button">게시글 작성하기</a>
+				
+				<!-- if 독서왕일 경우 출력-------------- -->	
+				<!--======= 클럽ㄱ ㅔ시글상세 ========-->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

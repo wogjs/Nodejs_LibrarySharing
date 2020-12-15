@@ -1,0 +1,254 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<input id="id" value="<%= bookDetail[0].ID%>" hidden>
+		<input id="ISBN" value="<%= bookDetail[0].ISBN%>" hidden>
+		<!------------------------HEADER::공통------------------------>
+
+		<!-- javascript:검색어 체크 -->
+		<script type="text/javascript">
+			function keyworkd_check() {
+				if (document.search.keyword.value == '') {
+					alert('검색어를 입력하세요');
+					document.search.keyword.focus();
+					return false;
+				}
+			}
+
+			var id = document.getElementById('id').value;
+			var ISBN = document.getElementById('ISBN').value;
+
+			function unLike() {
+                $.ajax({
+                    url: "/library/Like/?like=unlike&id=" + id + "&ISBN=" + ISBN,
+                    method:"POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                    if (data == false) {
+                        alert("다시 찍어주세요");
+
+                    }
+                    else {
+                    }
+                }
+                })
+                setTimeout(function () {
+                    location.reload();
+                },100);
+            }
+
+            function Like() {
+                $.ajax({
+                    url: "/library/Like/?like=like&id=" + id + "&ISBN=" + ISBN,
+                    method:"POST",
+                    dataType: "JSON",
+                    success: function (data) {
+                        if (data == false) {
+                            alert("다시 찍어주세요");
+                            
+                        }
+                        else {
+                        }
+                    }
+                })
+                setTimeout(function () {
+                    location.reload();
+                },100);
+            }
+
+		</script>
+		<!-- javascript:검색어 체크 -->
+
+		<!------------------------HEADER::공통------------------------>
+
+		<!------------------------메인------------------------>
+
+		<!-- -----------------대댓글용 -->
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+		
+		<!-- -------------대댓글용 -->
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+					<!--======= 책상세 ========-->
+					<table class="table table-bordered " style="text-align : center; border : 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan = "6"><h4><%= bookDetail[0].Title%></h4></th>
+							</tr>
+							<tr>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>ISBN</h5></td>
+								<td><h5> <%= bookDetail[0].ISBN%> </h5></td>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>장르</h5></td>
+								<td><h5> <%= bookDetail[0].Genre_Name%> </h5></td>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>저자</h5></td>
+								<td><h5> <%= bookDetail[0].Author%> </h5></td>
+							</tr>
+							<tr>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>출판사</h5></td>
+								<td><h5> <%= bookDetail[0].Publisher%> </h5></td>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>출간일</h5></td>
+								<td><h5> <%= bookDetail[0].Publication_Date%> </h5></td>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>옮긴이</h5></td>
+								<td><h5> <%= bookDetail[0].Translator%></h5></td>
+							</tr>
+							<tr>
+								<% if (sess.userid == bookDetail[0].ID) { %>
+									<td style="background-color:#fafafa; color:#000; width:80px;"><h5>나의 별점</h5></td>
+								<% } else { %>
+									<td style="background-color:#fafafa; color:#000; width:80px;"><h5><%= bookDetail[0].ID%>의 별점</h5></td>
+								<% } %>
+								<td colspan="5" style="text-align:center;">
+									<% if (star == undefined) { %>
+										<p>별점 없음</p>
+									<% } else {%>
+									  <%-include('head/star.ejs')%>
+									<% } %>
+								</td>
+							</tr>
+							<tr>
+								<td style="background-color:#fafafa; color:#000; width:80px;"><h5>표지</h5></td>
+								<td colspan="5"><h5><img src="../../public/<%= bookDetail[0].Cover%>" style="width:300px;"></h5></td>
+							 </tr>
+						</thead>
+						<tbody>
+							<!--if 서평 작성한 거 없을 시 ------------>
+							<% if (check == false) { %>
+								<% if (sess.userid == bookDetail[0].ID) { %>
+								<tr>
+									<td colspan="6" style="padding:0;">
+										<a href="/library/myReviewWrite/?ID=<%= bookDetail[0].ID%>&ISBN=<%= bookDetail[0].ISBN %>"  class="btn btn-primary " style="margin-right: 3px; width: 100%; height: 40px;font-size: 20px;   font-weight:bold;" type="submit">서평 작성</a>
+									</td>
+								</tr>
+								<% } else { %>
+									<tr>
+										<td colspan="6" style="background-color:#fafafa; color:#000; height:20px;" colspan="6" >
+										서평
+										</td> 
+									</tr>
+									<tr>
+										<td colspan="6">
+											<h4 style="text-align:center;">" 작성된 서평이 없습니다. "</h4>
+										</td> 
+									</tr>
+								<% } %>
+							<% } %>
+							<!-- if 서평 작성한 거 없을 시 ---------------->
+							<!--if 서평 작성한 거 있을 시 ------------------>
+							<% if (check == true) { %>
+							<tr>
+								<td colspan="6" style="background-color:#fafafa; color:#000; height:20px;" colspan="6">
+									서평
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">
+									<h4 style="text-align:center;">" <%= reviewRow[0].Strapline%> "</h4>
+								</td>
+							</tr>
+							<tr onclick="location.href='#'">
+								<td colspan="6" class="review_pre" style="" 　>
+									<p><%= reviewRow[0].Con %></p>
+									<span class="pull-right insertDate">at <%= reviewRow[0].Write_Date%></span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6" style="text-align: left;">
+									좋아요 :
+									<% if(like.length == 0){ %>
+										<button name="unLike" id="unLike" onclick="unLike()"><img class="media-object"
+												style="width:30px; height: 30px; margin-top: -5px;display:inline;"
+												src="../../public/img/black_like.png"></button>
+									<% } else { %>
+										<button name="Like" id="Like" onclick="Like();"><img class="media-object"
+												style="width:30px; height: 30px; margin-top: -5px;display:inline;"
+												src="../../public/img/like.png"></button>
+									<% } %>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;좋아요 수 : <%= SSum[0].count %>
+								</td>
+							</tr>
+							<tr>
+								<% if(bookDetail[0].ID == sess.userid) { %>
+								<td colspan="6" style="padding:0;">
+									<a href="/library/myReviewUpdate/?ID=<%= reviewRow[0].ID%>&ISBN=<%= reviewRow[0].ISBN %>"
+										class="btn btn-primary "
+										style="margin-right: 3px; width: 100%; height: 40px;font-size: 20px;   font-weight:bold;"
+										type="submit">서평/별점 수정</a>
+								</td>
+								<% } %>
+							</tr>
+							<!-------------if 서평에 댓글없을 시 ------------------>
+							<% if (commentrow[0] == null) { %>
+							<tr>
+								<td style="background-color:#fafafa; color:#0000; height:20px;" colspan="6">
+									작성된 댓글이 없습니다
+								</td>
+							</tr>
+							<% } else { %>
+							<!-----------if 서평에 댓글없을 시 ------------------>
+							<!-----------if 서평에 댓글있을 시 ------------------>
+							<tr>
+								<td style="background-color:#fafafa; color:#0000; height:20px;" colspan="6">
+									댓글
+								</td>
+							</tr>
+							<% } %>
+							<!-------------if 서평에 댓글있을 시 ------------------>
+							<!--if 서평 작성한 거 있을 시 ------------------>
+							<!--if 서평에 댓글 있을 시 ------------------>
+
+							<% if (commentrow[0] != null) { %>
+								<% for (var i=0; i< commentrow.length; i++) { %>
+									<tr>							
+										<td onclick="location.href='/library/library/<%= commentrow[0].ID%>'"><%= commentrow[i].ID%></td>
+										<td style="text-align:left;" colspan="5" id="comment"   Group_Seq="1">
+											<%= commentrow[i].Comment_Con %>
+											<span class="pull-right insertDate">at <%= commentrow[i].Write_Date %></span>
+										</td>
+									</tr>
+								<% } %>
+							<% } %>
+	
+							<!-- <tr>	
+								<td onclick="location.href='#?id='">회원이름</td>
+								<td style="text-align:left;" colspan="5"  id="comment"  Group_Seq="1">
+									댓글입니다
+									<span class="pull-right insertDate">at 2019.1.1(Write_Date)</span>
+								</td>
+							</tr>
+							<tr>					
+								<td onclick="location.href='#?id='">회원이름</td>
+								<td style="text-align:left;" colspan="5" id="comment"   Group_Seq="2">
+									<span >▶ </span>대댓글입니다
+									<span class="pull-right insertDate">at 2019.1.1(Write_Date)</span>
+								</td>
+							</tr> -->
+							
+							<tr  class="insertComment">
+								<td colspan="6" ><form action="/library/myBookDetail/comment/?ID=<%= bookDetail[0].ID %>&ISBN=<%= bookDetail[0].ISBN %>" method="post">	
+									<input style="width: 100%; height: 100px;" name="Comment_Con" placeholder="댓글내용을 입력하세요">
+									<input style="width: 100%;" class="btn btn-primary" onclick="idCheckFunction();" type="submit" value="댓글 작성하기">		
+								</form></td>
+								
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+					<!--======= 책상세 ========-->
+					</main>
+				</div>
+			</div>
+			<!------------------------메인------------------------->
+		</div>
+	</body>
+	</html>
+	

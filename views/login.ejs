@@ -1,0 +1,80 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+		<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<!-- 독서왕 view	-->
+				<main class="iam-main ng-scope"> 
+				<!-- iam-main-inner -->
+					<div class="iam-main-inner">
+						<!-- contents -->
+						<div class="iam-contents">
+							<h2>LOGIN</h2>
+							<!-- forms-->
+							<div class="iam-forms">
+	
+								<form method="post" action="/users/login"
+									class="ng-pristine ng-valid ng-valid-email ng-valid-maxlength">
+									<fieldset>
+										<legend>Account ForPet login</legend>
+										<!-- user -->
+										<div class="iam-input-container">
+											<input id="iptLgnPlnID" type="text" name="ID"
+												placeholder="아이디(이메일)를 입력하세요" maxlength="20"
+												class="ng-pristine ng-valid ng-empty ng-valid-email ng-valid-maxlength ng-touched"
+												autocomplete="off">
+										</div>
+										<div class="iam-input-container  ">
+											<input id="iptLgnPlnPD" type="password" name="PW"
+												placeholder="비밀번호를 입력하세요" maxlength="20"
+												class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
+												autocomplete="off">
+										</div>
+										<!-- //user -->
+	
+										<!-- remember id 관련 추가 -->
+										<div class="iam-radio" id="rememberID">
+											<input type="checkbox" id="remIdChkYN"
+												data-ng-model="vm.remIdChkYN" ng-enter=""
+												class="ng-pristine ng-untouched ng-valid ng-empty"
+												autocomplete="off"> <label for="remIdChkYN"><span><span></span></span>ID
+												기억하기</label>
+										</div>
+										<!-- // remember id 관련 추가 -->
+										<div class="iam-signIn-button">
+											<button class="iam-button iam-primary" id="signInButton"
+												type="submit">로그인</button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+							<!-- //forms -->
+							<div class="iam-signIn-link">
+								<a href="#">ID 찾기 및 비밀번호 재설정</a> <span
+									class="break">또는</span> <a href="/users/join"
+									data-ng-click="signUp()">회원가입</a>
+							</div>
+						</div>
+						
+						<!-- //contents -->
+					</div>
+				</main>
+				<!-- 이달의 책 view	-->
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

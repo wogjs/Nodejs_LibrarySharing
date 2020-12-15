@@ -1,0 +1,99 @@
+
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+        <%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+      <!------------------------HEADER::공통------------------------>
+
+                     <!-- javascript:검색어 체크 -->
+                     <script type="text/javascript">
+                        function keyworkd_check() {
+                           if (document.search.keyword.value == '') {
+                              alert('검색어를 입력하세요');
+                              document.search.keyword.focus();
+                              return false;
+                           }
+                        }
+                     </script>
+                     <!-- javascript:검색어 체크 -->
+
+      <!------------------------메인------------------------>
+   <!-- --------별점용 -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>s
+   <script type="text/javascript">
+
+    $(document).on("click","span[id='starR']",function(){
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+        var dd = $(this).prevAll().length ;
+        var Star = (dd+1)/2;
+        Star = Star.toFixed(1);
+       // $("#starValue").val(Star);
+       $("input[type=text][name='star']").val(Star);
+
+        alert('별점점수'+Star);
+        return false;
+      });
+   </script>
+   <!-- --------------별점용 -->
+      <div class="container">
+         <!-- iam-wrapper -->
+         <div class="iam-wrapper">
+            <main class="iam-main ng-scope">
+            <!--======= 답변form ========-->
+            <form action="/library/myReviewWrite/?ID=<%= reviewRow[0].ID%>&ISBN=<%= reviewRow[0].ISBN %>" method="post">
+               <table class="table table-bordered" style="text-align : center; border : 1px solid #dddddd; ;">
+                  <thead >
+                        <th colspan="2"><h4>
+                        [<span id="title"><%= bookrow[0].Title%></span>]
+                        &nbsp;&nbsp;::&nbsp;&nbsp;서평작성하기
+                        </h4></th>
+                  </thead>
+                  <tbody>
+                  <tr>
+                     <td style="background-color:#fafafa; color:#000; width:80px;"><h5>나의 별점</h5></td>
+                     <td colspan="5">
+                          <span id="starR" class="starR1">별1_왼쪽</span>
+                          <span  id="starR" class="starR2">별1_오른쪽</span>
+                          <span  id="starR" class="starR1">별2_왼쪽</span>
+                          <span  id="starR" class="starR2">별2_오른쪽</span>
+                          <span  id="starR" class="starR1">별3_왼쪽</span>
+                          <span  id="starR" class="starR2">별3_오른쪽</span>
+                          <span  id="starR" class="starR1">별4_왼쪽</span>
+                          <span id="starR"  class="starR2">별4_오른쪽</span>
+                          <span id="starR"  class="starR1">별5_왼쪽</span>
+                          <span id="starR"  class="starR2">별5_오른쪽</span>
+                          <div id="starValue"  class="pull-left">
+                          ( <input type="text" readonly id="starValue" style="border:none;width:30px;text-align:center;" name="star" value="0.0">)
+                          </div>
+                     </td>
+                  </tr>
+                     <tr>
+                        <td colspan="2" style="background-color:#fafafa; color:#000;">
+                           <input type="hidden" name="ISBN" value="isbn입력">
+                           <input class="form-control"  name="Strapline" type="text"  maxlength="300"   placeholder="서평 소제목을 입력하세요">
+                        
+                           <textarea class="form-control"  name="Con"  style="height:300px;" placeholder="서평 내용을 입력하세요"></textarea>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div style="width:100%;   height:40px;    text-align:center;">
+                  <button type="submit"  class="btn btn-primary" style="width:100%; margin-bottom:2px;">완료</button>
+                  <button type="button"  class="btn btn-primary" style="width:100%;background-color: #333;" onclick="location.href='#'">취소</button>
+               </div>
+            </form>
+            <!--======= 답변form ========-->
+            </main>
+         </div>
+      </div>
+      <!------------------------메인------------------------->
+   </div>
+</body>
+</html>

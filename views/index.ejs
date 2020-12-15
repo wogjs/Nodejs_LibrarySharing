@@ -1,0 +1,95 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+
+	<%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<script type="text/javascript">
+			function keyworkd_check() {
+				if (document.search.keyword.value == '') {
+					alert('검색어를 입력하세요');
+					document.search.keyword.focus();
+					return false;
+				}
+			}
+		</script>
+		<!------------------------메인------------------------>
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<!-- 독서왕 view	-->
+				<main class="iam-main ng-scope">
+					<table class="table"
+						style="margin: 0 auto;background: white; text-align: center; border: 1px solid #dddddd;">
+						<thead>
+							<tr>
+								<th colspan="3">
+									<h3>이 달의 독서왕</h3>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="viewsTable">
+							<!-- 여기에 내용 -->
+							<tr>
+							<% for (var i=0; i< king.length; i++) { %>
+								<% if (i%3==0) { %>
+									<tr></tr>		
+								<% } %>
+										<td onclick="location.href='/library/library/<%=king[i].ID%>'" style="border: 1px solid #dddddd">
+									<h4>
+										<span class="label label-info"> <%= king[i].gen_Name%></span>&nbsp; &nbsp;
+										<a href="#"><%=king[i].Name%></a>
+									</h4>
+									<div class="pull-right">>> <%=king[i].rbAmount%>권</div>
+								</td>
+							<% } %>
+							</tr>
+						</tbody>
+					</table>
+				</main>
+				<!-- 독서왕 view	-->
+				<!-- 이달의 책 view	-->
+				<main class="iam-main ng-scope">
+					<table class="table"
+						style="margin: 0 auto;background: white; text-align: center; border: 1px solid #dddddd;">
+						<thead>
+							<tr>
+								<th colspan="4">
+									<h3>이런 책도 있어요</h3>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="viewsTable">
+							<!-- 여기에 내용 -->
+							<tr>
+								<% for (var i=0; i< 4; i++) { %>
+									<td onclick="location.href='/book/bookDetail/<%=book[i].ISBN%>'" style="width: 100px;">
+										<img class="media-object"
+											style="width:100px;height: 150px; margin:0px auto;display:inline;"
+											src="../../<%= book[i].Cover%>">
+
+										<h4>
+											<span class="label label-info"> <%= book[i].Genre_Name%></span>&nbsp; &nbsp;
+											<a href="/book/bookDetail/<%=book[i].ISBN%>"><%= book[i].Title%></a>
+										</h4>
+									</td>
+								<% } %>
+							</tr>
+						</tbody>
+					</table>
+				</main>
+				<!-- 이달의 책 view	-->
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+        <%-include('head/nav.ejs')%>
+
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+								function btn(){
+									alert('로그인 후 이용가능합니다.');
+								}
+
+
+							</script>
+							<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope" style="text-align: center;">
+				<!--======= 답변리스트 ========-->
+				<div style="display:inline-block; width: 45%; vertical-align: top;">
+				
+					<table class="table table-bordered table-hover" style="text-align : center; border : 1px solid #dddddd; ">
+						<thead>
+							<tr>
+								<th ><h4>답변리스트</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+                            <!-----------답변 예시------->
+                            
+							<tr  class="answerQ" style="color: black; text-align : left;">
+								<td>
+                                    <h5>Q. <%= queList[0].Que_Title%></h5>
+								</td> 
+							</tr>
+							<% if (answerList.length != 0) { %>
+								<% for(var i=0; i< answerList.length; i++) { %>
+								<tr class="answerA" style="color: black; text-align : left;">
+									<td>
+										A. <%= answerList[i].Answer_Title%>
+									</td>
+								</tr>
+								<tr class="answerAcon" style="color: black; text-align : left;">
+									<td>
+										> <%= answerList[i].Answer_Con%>
+									</td>
+								</tr>
+								<% } %>
+							<% } else { %>
+								<tr class="answerAcon" style="color: black; text-align : left;">
+									<td>
+										> 작성된 답변이 없습니다.
+									</td>
+								</tr>
+							<% } %>
+							<!-----------답변 예시------->
+						</tbody>
+					</table>
+				</div>
+				<!--======= 답변리스트 ========-->
+					<div class="iam-input-container" id="idchk">
+					<% if (sess.userid == null) { %>
+						<button class="btn btn-primary" onclick="javascript:btn(); location.href='/users/login'">답변 작성하러 가기</button>
+						<% } else { %>
+						<button type="button"  class="btn btn-primary" style="width:50%; ;" onclick="location.href='/book/answerWrite/<%= queList[0].Que_Code %>'">답변 작성하러 가기</button>
+						<% } %>
+				</div>
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

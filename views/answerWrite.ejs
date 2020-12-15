@@ -1,0 +1,72 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+        <%-include('head/nav.ejs')%>
+
+		<!------------------------HEADER::공통------------------------>
+
+							<!-- javascript:검색어 체크 -->
+							<script type="text/javascript">
+								function keyworkd_check() {
+									if (document.search.keyword.value == '') {
+										alert('검색어를 입력하세요');
+										document.search.keyword.focus();
+										return false;
+									}
+								}
+							</script>
+							<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper" style="width:100%;   height:40px;    text-align:center;">
+				<main class="iam-main ng-scope">
+				<form method="post" action="/book/answerWrite/<%= answerWrite[0].Que_Code %>" class="ng-pristine ng-valid ng-valid-email ng-valid-maxlength">
+
+				
+				
+				<!--======= 답변리스트 ========-->
+				<div style="display:inline-block; width: 45%; vertical-align: top;">	
+					<!-- <form name="Answer" method="post" action="#" > -->
+					<table class="table table-bordered table-hover" style="text-align : center; border : 1px solid #dddddd; ">
+						<thead>
+							<tr>
+								<th ><h4>답변리스트</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<!-----------답변 예시------->
+							<tr class="answerA">
+								<td >
+									<input class="form-control"  name="Answer_Title" type="text"  maxlength="300"   placeholder="답변 제목을 입력하세요">
+								
+									<input class="form-control"  name="Answer_Con" type="text"  maxlength="300"  style="height:100px;" placeholder="답변 내용을 입력하세요">
+								</td> 
+							</tr>
+							<!-----------답변 예시------->
+						</tbody>
+					</table>
+					<!-- </form> -->
+				</div>
+				<!--======= 답변리스트 ========-->
+				<div style="width:100%;   height:40px;    text-align:center;">
+					<!-- <input type="submit"  class="btn btn-primary" style="width:100%" value="완료"></input> -->
+					<button class="btn btn-primary" style="width:30%" type="submit">완료</button>
+				</div>
+			</form>
+			
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

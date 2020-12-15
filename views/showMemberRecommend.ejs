@@ -1,0 +1,114 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+      <!------------------------HEADER::공통------------------------>
+
+                     <!-- javascript:검색어 체크 -->
+                     <script type="text/javascript">
+                        function keyworkd_check() {
+                           if (document.search.keyword.value == '') {
+                              alert('검색어를 입력하세요');
+                              document.search.keyword.focus();
+                              return false;
+                           }
+                        }
+                     </script>
+                     <!-- javascript:검색어 체크 -->
+
+      <!------------------------메인------------------------>
+      <!---클럽요청 -->
+      <script type="text/javascript">
+      
+         function requestClub(){
+            $("#checkType").attr("class","modal-content panel-success");
+            $('#messageModal').modal("show");
+         }
+
+      </script>
+         <!---클럽요청 -->
+      <div class="container">
+         <!-- iam-wrapper -->
+         <div class="iam-wrapper">
+            <main class="iam-main ng-scope">
+               <form method="get" action="/users/search/" onSubmit="return keyworkd_check()">
+                  <div
+                     style="text-align: center; background-color:#eee; border: 1px solid #dddddd; padding:10px;margin-bottom: 30px;">
+                     <select name="searchWhat" style=" display: inline;    width: 100px;" class="form-control">
+                       <option value="Genre_Name">장르명</option>
+                       <option value="Title">조회수</option>
+                     </select>
+                     <input class="form-control" style="display: inline;width: 80%;" name="searchKey" type="text"
+                       maxlength="20" placeholder="책 제목을 검색하세요">
+                     <input class="btn btn-primary" type="submit" value="검색">
+                  </div>
+                </form>
+            <!-- ------------회원리스트 출력 =========== -->
+               <table class="table table-bordered table-hover" id="searchResult" style="text-align: center; border: 1px solid #dddddd">
+                  <thead>
+                     <tr>
+                        <th colspan="6">
+                           <h4>[ 추천 서재 ] LIST</h4>
+                        </th>
+                     </tr>
+                     <tr>
+                        <th style="background-color: #fafafa; color: #000000; width: 150px;"><h5>이름</h5></th>
+                        <% if (selectKing != null) { %>
+                           <% if (chk == true) { %>
+                           <th style="background-color: #fafafa; color: #000000;width: 300px;"><h5>읽은 량</h5></th>
+                           <% } else { %>
+                              <th style="background-color: #fafafa; color: #000000;width: 300px;"><h5>조회수</h5></th>
+                           <% } %>
+                        <% } else { %>
+                           <th style="background-color: #fafafa; color: #000000;width: 300px;"><h5>독서클럽 이름</h5></th>
+                        <% } %>
+                        <th style="background-color: #fafafa; color: #000000; "><h5>독서왕 뱃지</h5></th>
+                  </thead>
+                  <tbody>
+                     <% for (var i=0; i< kingList.length; i++) { %>
+                        <tr onclick="location.href='/library/library/<%= kingList[i].ID%>'">
+                           <td><h5><%= kingList[i].ID%></h5></td>
+                           <td style="text-align: left;">
+                              <% if (selectKing != null) { %>
+                                 <% if (chk == true) { %>
+                                    <h5><%= kingList[i].Reading_Book_Amount%></h5>
+                                 <% } else { %>
+                                    <h5><%= kingList[i].Check_Num%></h5>
+                                 <% } %>
+                              <% } else { %>
+                                 <h5><%= kingList[i].Club_Name%></h5>
+                              <% } %>
+                           </td>
+                           <td class="myBadge">
+                              <% if (selectKing != null) { %>
+                                 <% for (var j=0; j< selectKing[i].kingCount; j++) {%>
+                                    <div class="media-object img-circle bkBadge">독서왕</div>
+                                 <% } %>
+                              <% } else { %>
+                                 <% for (var j=0; j< kingList[i].kingCount; j++) {%>
+                                    <div class="media-object img-circle bkBadge">독서왕</div>
+                                 <% } %>
+                              <% } %>
+                           </td>
+                        </tr>
+                     <% } %>
+                     <!-- 검색결과가 있을 경우 -->
+                  </tbody>
+               </table>
+               <button onclick="location.href='/users/mypage'"  class="btn btn-primary pull-right " type="button" style="width:100%;">마이페이지로 돌아가기</button>
+            
+            <!-- ------------회원리스트 출력 =========== -->
+            </main>
+         </div>
+      </div>
+      <!------------------------메인------------------------->
+   </div>
+</body>
+</html>

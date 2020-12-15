@@ -1,0 +1,219 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<!-----------------------script:JOIN -->
+		<script type="text/javascript">
+		
+		
+			/**idCheck :: 아이디중복체크 modal 창**/
+			function idCheckFunction(){
+				//사용자가 userID라는 INPU에 넣은 값 저장
+				var userID = $('#userID').val();
+				var result =1;
+				/** result 1 : 아이디사용가능 / 0 : 이미 존재하는 회원 / 그 외 : db오류 **/
+				if(result==1){
+					$("#checkMessage").html("사용할 수 있는 아이디입니다.");
+					$("#checkType").attr("class","modal-content panel-success");
+				} else if(result==0){
+
+					$("#checkMessage").html("이미 존재하는 아이디입니다.");
+					$("#checkType").attr("class","modal-content panel-warning");
+				}else {
+
+					$("#checkMessage").html("db오류 : 사용할 수 없는 아이디입니다.");
+					$("#checkType").attr("class","modal-content panel-warning");
+				}
+				$("#checkModal").modal("show");
+			}
+			/**pwCheck**/
+			function passwordCheckFunction(){
+				var userPassword1 = $('#userPassword1').val();
+				var userPassword2 = $('#userPassword2').val();
+				if(userPassword1 != userPassword2){
+					$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
+				}else{
+		
+					$('#passwordCheckMessage').html('');
+				}
+			}
+			/**휴대폰**/
+			    // 1. 숫자만 입력받게 하는 방법
+			    function onlyNumber() {
+			        if ((event.keyCode < 48) || (event.keyCode > 57))
+			            event.returnValue = false;
+			    }
+
+		</script>
+		<!-----------------------script:JOIN -->
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<!-- 독서왕 view	-->
+				<main class="iam-main ng-scope"> 
+					<!-- iam-main-inner -->
+					<div class="iam-main-inner">
+					<!-- contents -->
+						<div class="iam-contents">
+							<h2>Register Update</h2>
+							<!-- forms-->
+							<div class="iam-forms">
+								<form method="post" action="#" class="ng-pristine ng-valid ng-valid-email ng-valid-maxlength">
+									<fieldset>
+										<legend>Account Jasmine Join</legend>
+										<!-- user -->
+										<div class="iam-input-container">
+											<input  type="text" name="id" value="id(db에 저장된 값 value에 넣어주세요)" readonly class="ng-pristine ng-valid ng-empty ng-valid-email ng-valid-maxlength ng-touched" autocomplete="off">
+										</div>
+										<div class="iam-input-container">
+											<input  type="text" name="userName" value="Name" maxlength="50" class="ng-pristine ng-valid ng-empty ng-valid-email ng-valid-maxlength ng-touched" autocomplete="off">
+										</div>
+										<div class="iam-input-container  ">
+											<input onkeyup="passwordCheckFunction();" id="userPassword1" type="password" name="PW" placeholder="수정할 비밀번호를 입력하세요" maxlength="20" class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" autocomplete="off">
+										</div>
+										<div class="iam-input-container  ">
+											<input onkeyup="passwordCheckFunction();" id="userPassword2" type="password" name="PW" placeholder="수정할 비밀번호를 동일하게 입력하세요" maxlength="20" class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength" autocomplete="off">
+										</div>
+										<div>
+											<!-- 패스워드 일치 여부 출력 -->
+											<label for="remIdChkYN"><span id="passwordCheckMessage" style="color:red;"></span></label>
+											<hr><hr>
+											
+										</div>
+										<div class="iam-input-container  ">
+											<input  type="email" name="Email" value="Email" maxlength="50" class="ng-pristine ng-valid ng-empty ng-valid-email ng-valid-maxlength ng-touched" autocomplete="off">
+										</div>
+										<div class="iam-input-container  "  id="txtMobile">	
+											<div id="txtMobileLabel">전화번호 :: </div>
+											<select id="txtMobile1" name="Phone_Num1">
+											    <option value="">--선택--</option>
+											    <option value="011">011</option>
+											    <option value="016">016</option>
+											    <option value="017">017</option>
+											    <option value="019">019</option>
+											    <option value="010" selected>010</option>
+											</select>
+											<div><hr></div>
+											<input type="text" value="Phone_Num2" id="txtMobile2"  name="Phone_Num2" maxlength="4" onkeypress="onlyNumber();" />
+											
+											<div><hr></div>
+											<input type="text" value="Phone_Num3" id="txtMobile3"  name="Phone_Num3" maxlength="4" />
+										</div>
+										<div class="iam-input-container  "  id="txtMobile">
+										
+											<div id="txtMobileLabel">생년월일 :: </div>
+											
+											<input type="text" id="txtMobile2"  value="Birthday1" name="Birthday1" maxlength="4" onkeypress="onlyNumber();" />
+											
+											<div>년</div>
+											<select id="txtMobile1" name="txtBirth3">
+												<option value="01">01</option>
+												<option value="02">02</option>
+												<option value="03">03</option>
+												<option value="04">04</option>
+												<option value="05">05</option>
+												<option value="06">06</option>
+												<option value="07">07</option>
+												<option value="08">08</option>
+												<option value="09" >09</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12" selected>12</select>
+											<div>월</div>
+											<select id="txtMobile1" name="txtBirth3">											<option value="01">01</option>
+												<option value="02">02</option>
+												<option value="03">03</option>
+												<option value="04">04</option>
+												<option value="05">05</option>
+												<option value="06">06</option>
+												<option value="07">07</option>
+												<option value="08">08</option>
+												<option value="09">09</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+												<option value="13">13</option>
+												<option value="14">14</option>
+												<option value="15">15</option>
+												<option value="16">16</option>
+												<option value="17" selected>17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+												<option value="22">22</option>
+												<option value="23">23</option>
+												<option value="24">24</option>
+												<option value="25">25</option>
+												<option value="26">26</option>
+												<option value="27">27</option>
+												<option value="28">28</option>
+												<option value="29">29</option>
+												<option value="30">30</option>
+												<option value="31">31
+											</select>
+											<div>일</div>
+										</div>
+										<div class="iam-input-container">
+											<input  type="text" name="Address" value="Address"  class="ng-pristine ng-valid ng-empty ng-valid-email ng-valid-maxlength ng-touched" autocomplete="off">
+										</div>
+										<!-- //user -->	
+										
+										
+										<div class="iam-signIn-button"><button class="iam-button iam-primary" id="signInButton" type="submit">회원정보 수정</button></div>
+									</fieldset>
+								</form>
+							</div>
+							<!-- //forms -->
+							<div style="width:100%;   height:40px;    text-align:center;">
+										<button type="button" class="btn" style="width:100%; background-color:#c0c0c0;" onclick="location.href='#'">마이페이지로 돌아가기</button>
+							</div>
+						</div>
+						<!-- //contents -->
+					</div>
+				</main>
+				<!-- 이달의 책 view	-->
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+<!------------------------CHECK MODAL------------------------>
+<!----
+ * 사용 영역 *  아이디 중복체크 || 
+ ---->	
+	<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-hidden="true"> 
+		<div class="vertical-alignment-helper">
+			<div class="modal-dialog r vertical-align-cente">
+				<div id="checkType" class="modal-content panel-info">
+					<div class="modal-header panel-heading">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times</span>
+							<span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title">
+							확인 메시지
+						</h4>
+					</div>
+					<div id="checkMessage" class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!------------------------CHECK MODAL------------------------>
+</body>
+</html>

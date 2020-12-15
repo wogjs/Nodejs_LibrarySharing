@@ -1,0 +1,72 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope wrapper">
+				<!--======= 질문리스트 ========-->
+				<div style="display:inline-block; width: 36%; margin-right:3%;vertical-align: top;">
+					<div class="clubName">
+						[ <%= clubname[0].Club_Name %> ]
+					</div>
+					<div class="clubInfo">
+									- 장르명 : <%= clubname[0].Club_Name %><br>
+									- 클럽장 : <%= clubname[0].ID %><br>
+									- 회원수 : <%= clubname[0].User_Num %><br>
+									- 클럽생성일자 : <%= clubname[0].Club_Create_Date %>
+					</div>
+					<% if(sess.userid == null) { %>
+						<a href="/club/<%= clubname[0].Club_Name %>/join"  class="btn btn-primary pull-right  joinClub" >클럽 가입하기</a>
+					<% } else if(users[0].Club_Name == clubname[0].Club_Name) { %>
+						<a href="/club/<%= clubname[0].Club_Name %>/Withdrawal"  class="btn btn-primary pull-right  joinClub" >클럽 탈퇴하기</a>
+					<% } else { %>
+						<a href="/club/<%= clubname[0].Club_Name %>/join"  class="btn btn-primary pull-right  joinClub" >클럽 가입하기</a>
+					<% } %>
+
+				</div>
+				<!--======= 질문리스트 ========-->
+				<!--======= 클럽 게시글리스트 ========-->
+				<div style="display:inline-block; width: 60%; vertical-align: top;">
+				
+					<table class="table table-bordered " style=" border : 1px solid #dddddd; ">
+						<thead>
+							<tr>
+								<th ><h4>답변리스트</h4></th>
+							</tr>
+						</thead>
+						<tbody>
+                            <% for(var i = 0; i < clubpost.length; i++) { %>
+                                <tr onclick="location.href='/club/<%= clubpost[i].Club_Name%>/<%= clubpost[i].Post_Num %>'">
+                                    <td>
+                                        <h5><%= clubpost[i].Post_Title %></h5>
+                                    </td> 
+                                </tr>
+                            <% } %>
+						</tbody>
+					</table>
+				</div>
+				<!--======= 클럽 게시글리스트 ========-->
+				<% if(clubname[0].ID == sess.userid) { %>
+					<div style="width:100%;   height:40px;    text-align:center;">
+							<input type="button" onclick="location.href='/club/<%= clubname[0].Club_Name%>/post'" class="btn btn-primary" style="width:100%; ;" value="게시글 작성하기">
+					</div>
+				<% } %>
+				<!-- if 독서왕일 경우 출력-------------- -->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

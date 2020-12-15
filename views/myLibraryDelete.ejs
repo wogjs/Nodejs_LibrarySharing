@@ -1,0 +1,51 @@
+
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head>
+        <%-include('head/header.ejs')%>
+</head>
+<body class="fp-bodybg">
+    <div class="wrapper">
+            <%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+		<!------------------------메인------------------------>
+
+		<div class="container">
+
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+				<!-- 내 서재 삭제 view	-->
+				<form action="/library/myLibraryDelete" method="POST">	
+				<!-- form태그 :: checkbox클릭된 isbn값들 전송 -->
+				<div class="center">
+					<p class="lbraryTitle">
+						내 서재 - 도서 삭제하기
+					</p>
+					<div class="lib_wrapper">
+						<% for (var i=0; i< libraryRow.length; i++) { %>
+							<div class="lib_book ">
+								<input type="checkbox" name="deleteBooks" value="<%= libraryRow[i].ISBN%>" class="checkDelete">
+								<input type="hidden" name="deleteBooks" value="" class="checkDelete">
+								<img class="media-object" style="width:100px;height: 150px; margin:0px auto;display:inline;" src="../../public/img/cover_default.jpg">
+								<p><%= libraryRow[i].Title%></p>
+								<!-- if 서평 없으면 지워주세요! -->
+								
+							</div>
+						<% } %>
+					</div>
+					<div>
+						<input type="submit" class="btn btn-primary pull-right"  style="margin-left:10px; background-color:#000" value="완료"></input>						
+						<!-- <input class="btn btn-primary pull-right" onclick="location.href='/library/library/<%= sess.userid%>'" value="취소"></input> -->
+					</div>
+				</div>
+				</form>
+				<!-- 내 서재 view	-->
+				</main>
+			</div>
+		</div>
+		<!------------------------메인------------------------->
+	</div>
+</body>
+</html>

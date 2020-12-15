@@ -1,0 +1,161 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+	<%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+	<div class="wrapper">
+		<%-include('head/nav.ejs')%>
+		<!------------------------HEADER::공통------------------------>
+
+		<!-- javascript:검색어 체크 -->
+		<script type="text/javascript">
+			function keyworkd_check() {
+				if (document.search.keyword.value == '') {
+					alert('검색어를 입력하세요');
+					document.search.keyword.focus();
+					return false;
+				}
+			}
+		</script>
+		<!-- javascript:검색어 체크 -->
+
+		<!------------------------메인------------------------>
+		<!---클럽요청 -->
+		<script type="text/javascript">
+
+			function requestClub() {
+				$("#checkType").attr("class", "modal-content panel-success");
+				$('#messageModal').modal("show");
+			}
+
+
+			// $(function(){
+			// //직접입력 인풋박스 기존에는 숨어있다가
+			// 	$("#Genre_NameDirect").hide();
+			// 	$("#Genre_Name").change(function() {
+			// 		//직접입력을 누를 때 나타남
+			// 		if($("#Genre_Name").val() == "direct") {
+			// 			$("#Genre_NameDirect").show();
+			// 		} else {
+			// 			$("#Genre_NameDirect").hide();
+			// 		}
+			// 	}) 
+			// });
+
+		</script>
+		<!---클럽요청 -->
+		<div class="container">
+			<!-- iam-wrapper -->
+			<div class="iam-wrapper">
+				<main class="iam-main ng-scope">
+					<!-- --------세부 검색용 --------- -->
+					<form method="get" action="/club/search/" onSubmit="return keyworkd_check()">
+						<div
+						   style="text-align: center; background-color:#eee; border: 1px solid #dddddd; padding:10px;margin-bottom: 30px;">
+						   <select name="searchWhat" style=" display: inline;    width: 100px;" class="form-control">
+							  <option value="Club_Name">클럽명</option>
+							  <option value="Genre_Name">장르명</option>
+						   </select>
+						   <input class="form-control" style="display: inline;width: 80%;" name="searchKey" type="text"
+							  maxlength="20" placeholder="찾을 클럽명의 검색어를 입력하세요">
+						   <input class="btn btn-primary" type="submit" value="검색">
+						</div>
+					 </form>
+
+					<table class="table table-bordered table-hover" id="searchResult"
+						style="text-align: center; border: 1px solid #dddddd">
+						<thead>
+							<tr>
+								<th colspan="6">
+									<h4>클럽 LIST</h4>
+								</th>
+							</tr>
+							<tr>
+								<th style="background-color: #fafafa; color: #000000; width: 100px;">
+									<h5>장르</h5>
+								</th>
+								<th style="background-color: #fafafa; color: #000000;">
+									<h5>독서클럽명</h5>
+								</th>
+								<th style="background-color: #fafafa; color: #000000; width: 100px;">
+									<h5>클럽장</h5>
+								</th>
+								
+								<th style="background-color: #fafafa; color: #000000; width: 150px;">
+									<h5>클럽생성일자</h5>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(var i = 0; i < clubname.length; i++) { %>
+							<tr>
+								<td><%= clubname[i].Genre_Name%></td>
+								<td><a href="/club/<%= clubname[i].Club_Name%>"><%= clubname[i].Club_Name%></a></td>
+								<td><%= clubname[i].ID%></td>
+								
+								<td><%= clubname[i].Club_Create_Date%></td>
+							</tr>
+							<% } %>
+
+
+						</tbody>
+					</table>
+					<% if(sess.userid != null) { %>
+					<button onclick="requestClub();" class="btn btn-primary pull-right  joinClub" type="button">신규 클럽
+						요청하기</button>
+					<% } %>
+					<!--======= 검색결과 ========-->
+				</main>
+			</div>
+		</div>
+		<!-- ---------------------모달------------------- -->
+		<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<!-- form -->
+			<form action="/club/requset" method="post">
+				<div class="vertical-alignment-helper">
+					<div class="modal-dialog r vertical-align-cente">
+						<div id="checkType">
+							<div class="modal-header panel-heading">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times</span>
+									<span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title">
+									독서 클럽 요청
+								</h4>
+							</div>
+							<div class="modal-body">
+								<select id="Genre_Name" name="Genre_Name" style=" display: inline; width: 100%;"
+									class="form-control">
+									<option value="">장르명을 선택하세요</option>
+									<% for(var i=0; i < genre.length; i++) { %>
+									<option value="<%= genre[i].Genre_Name%>"><%= genre[i].Genre_Name %></option>
+									<% } %>
+									<!-- <option value="direct">직접입력</option> -->
+								</select>
+								<!-- <input class="ng-pristine ng-valid ng-empty  ng-valid-maxlength ng-touched" style="padding:8px; display:block; width:100%;" type="text" id="Genre_NameDirect" name="Genre_NameDirect" placeholder="장르를 입력하세요"> -->
+								<input type="text" name="title" placeholder="요청 제목을 입력하세요" maxlength="50"
+									class="ng-pristine ng-valid ng-empty  ng-valid-maxlength ng-touched"
+									autocomplete="off" style="padding:8px; display:block; width:100%;">
+								<textarea class="form-control" style="height:100%;resize: none;" name="reason"
+									placeholder="요청 사유를 입력하세요"></textarea>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">확인</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- ---------------------모달------------------- -->
+		<!------------------------메인------------------------->
+	</div>
+</body>
+
+</html>

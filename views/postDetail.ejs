@@ -1,0 +1,116 @@
+<!------------------------HEADER :: 공통 ----------------------->
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <%-include('head/header.ejs')%>
+</head>
+
+<body class="fp-bodybg">
+    <div class="wrapper">
+        <%-include('head/nav.ejs')%>
+        <!------------------------HEADER::공통------------------------>
+
+        <!-- javascript:검색어 체크 -->
+        <script type="text/javascript">
+            function keyworkd_check() {
+                if (document.search.keyword.value == '') {
+                    alert('검색어를 입력하세요');
+                    document.search.keyword.focus();
+                    return false;
+                }
+            }
+        </script>
+        <!-- javascript:검색어 체크 -->
+
+        <!------------------------HEADER::공통------------------------>
+
+        <!------------------------메인------------------------>
+
+        <!-- -----------------대댓글용 -->
+        <!-- -------------대댓글용 -->
+        <div class="container">
+            <!-- iam-wrapper -->
+            <div class="iam-wrapper">
+                <main class="iam-main ng-scope">
+                    <!--======= 책상세 ========-->
+                    <table class="table table-bordered " style="text-align : center; border : 1px solid #dddddd">
+                        <thead>
+                            <tr>
+                                <th colspan="4">
+                                    <h4><%= detail[0].Post_Title%></h4>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td style="background-color:#fafafa; color:#000; width:80px;">
+                                    <h5>번호</h5>
+                                </td>
+                                <td>
+                                    <h5> <%= detail[0].Post_Num%> </h5>
+                                </td>
+                                <td style="background-color:#fafafa; color:#000; width:80px;">
+                                    <h5>작성일자</h5>
+                                </td>
+                                <td>
+                                    <h5> <%= detail[0].Write_Date%> </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color:#fafafa; color:#000; width:80px;">
+                                    <h5>내용</h5>
+                                </td>
+                                <td colspan="3"><%= detail[0].Post_Con%></td>
+                            </tr>
+                            <!-------------if 게시글에 댓글없을 시 ------------------>
+                            <% if(comm.length == 0) { %>
+                            <tr>
+                                <td style="background-color:#fafafa; color:#000; height:20px;" colspan="6">
+                                    작성된 댓글이 없습니다
+                                </td>
+                            </tr>
+                            <% } else { %>
+                            <!-----------if 게시글에 댓글있을 시 ------------------>
+                            <tr>
+                                <td style="background-color:#fafafa; color:#000; height:20px;" colspan="6">
+                                    댓글
+                                </td>
+                            </tr>
+                            <% for(var i = 0; i < comm.length; i++) { %>
+                            <tr>
+                                <td onclick="location.href='/library/library/<%= comm[i].ID%>'"><%= comm[i].ID%></td>
+                                <td style="text-align:left;" colspan="5">
+                                    <%= comm[i].Comment_Con%>
+                                    <% if(comm[i].ID == sess.userid) { %>
+                                        <span class="pull-right insertDate"><a href="/club/<%= detail[0].Club_Name %>/<%= detail[0].Post_Num %>/drop">삭제하기</a></span>    
+                                    <% } %>
+                                    <span class="pull-right insertDate" style="text-align: right;">at <%= comm[i].Write_Date%></span>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <% } %>
+                            <!-------------if 게시글에 댓글있을 시 ------------------>
+                            <tr class="insertComment">
+                                <td colspan="4">
+                                    <form action="/club/<%= detail[0].Club_Name%>/<%= detail[0].Post_Num %>/comment" method="post">
+                                        <textarea name="comment" placeholder="댓글내용을 입력하세요"></textarea>
+                                        <button class="btn btn-primary" type="submit">댓글 작성하기</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="btn btn-primary pull-right btnBlue">목록으로 돌아가기</a>
+                    <a href="#" class="btn btn-primary pull-right btnRed">게시글 수정하기</a>
+
+                    <!--======= 클럽ㄱ ㅔ시글상세 ========-->
+                </main>
+            </div>
+        </div>
+        <!------------------------메인------------------------->
+    </div>
+</body>
+
+</html>
